@@ -4,8 +4,6 @@
  */
 package entities;
 
-import java.util.Optional;
-
 /**
  *
  * @author Maique

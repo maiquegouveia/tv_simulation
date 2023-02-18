@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package entities;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 /**
  *
@@ -11,7 +12,8 @@ import java.util.Scanner;
 public class RemoteControl {
     int menuTvOption, choseChannel;
     int username, password;
-    int mode;
+    int modeOption, loginOption;
+    int newLogin;
     
     Scanner scan = new Scanner(System.in);
     
@@ -81,7 +83,8 @@ public class RemoteControl {
             System.out.println("4 - Change Channel");
             System.out.println("5 - Connect/Disconnect");
             System.out.println("6 - Select Mode");
-            System.out.println("7 - Change Tv");
+            System.out.println("7 - Change Login");
+            System.out.println("8 - Change Tv");
             System.out.println("\nChoose an option ->");
             menuTvOption = scan.nextInt();
 
@@ -158,8 +161,8 @@ public class RemoteControl {
                             System.out.println("1 - TV");
                             System.out.println("2 - Streaming");
                             System.out.println("\n Choose an option ->");
-                            mode = scan.nextInt();    
-                            switch (mode) {
+                            modeOption = scan.nextInt();    
+                            switch (modeOption) {
                                 case 1 -> tv.ChangeModeToTv();
                                 case 2 -> {
                                     if(tv.CheckConnection()){
@@ -170,17 +173,62 @@ public class RemoteControl {
                                 }
                                 default -> System.out.println("\nInvalid option");
                             }
-                        } while (mode != 1 && mode != 2);
+                        } while (modeOption != 1 && modeOption != 2);
                     } else {
                         System.out.println("\nTurn on the TV first");
                     }
                     
                     
                 }
-                case 7 -> {}
+                case 7 -> {
+                    if(tv.isOn == true){
+                        if(tv.CheckConnection()){
+                            do{
+                                System.out.println("\nChange Login\n");
+                                System.out.println("1 - Username");
+                                System.out.println("2 - Password");
+                                System.out.println("3 - Go Back");
+                                System.out.println("\n Choose an option ->");
+                                loginOption = scan.nextInt();
+                                switch(loginOption){
+                                    case 1 -> {
+                                        System.out.print("\nEnter new username: ");
+                                        try{
+                                            newLogin = scan.nextInt();
+                                            tv.ChangeSmartLoginUsername(newLogin);
+                                            System.out.println("\nChanges saved");
+                                        } catch(InputMismatchException e){
+                                            System.out.println("\nThe username can only be numbers");
+                                            scan.nextLine();
+                                        }
+   
+                                    }
+                                    case 2 -> {
+                                        System.out.print("\nEnter new password: ");
+                                        try{
+                                            newLogin = scan.nextInt();
+                                            tv.ChangeSmartLoginPassword(newLogin);
+                                            System.out.println("\nChanges saved");
+                                        } catch(InputMismatchException e){
+                                            System.out.println("\nThe password can only be numbers");
+                                            scan.nextLine();
+                                        }
+                                    }
+                                    case 3 -> {}
+                                    default -> System.out.println("\nInvalid option");
+                                }
+                            } while(loginOption != 3);
+                        } else {
+                            System.out.println("\nNo connection");
+                        }
+                    } else {
+                        System.out.println("\nTurn on the TV first");
+                    }
+                }
+                case 8 -> {}
                 default -> System.out.println("\nInvalid option");
             }
-        } while(menuTvOption != 7);
+        } while(menuTvOption != 8);
     }
 
     public String StatusTv(Boolean isOn){

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.mavenproject1;
+package application;
 import entities.SmartTv;
 import entities.Tv;
 import entities.RemoteControl;
@@ -11,7 +11,7 @@ import java.util.Scanner;
  *
  * @author Maique
  */
-public class TestSmartTv {
+public class Main {
     public static void main(String[] args){
         Scanner scan = new Scanner(System.in);
         RemoteControl control = new RemoteControl();
