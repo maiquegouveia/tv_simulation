@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package entities;
-import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 /**
@@ -25,30 +24,16 @@ public class Tv {
         channels.add(7);
         channels.add(11);
     }
-    
-    Scanner scan = new Scanner(System.in);
-    
+     
     public void TurnOnAndOffTv(){
-        if(isOn == true){
-            isOn = false;
-            System.out.println("\nThe TV is off");
-        } else {
-            isOn = true;
-            System.out.println("\nThe TV is on");
-        }
+        isOn = isOn != true;
     }
 
     public void TurnUpTvVolume(){
         if(isOn == true){
             if(volume < 100){
                 volume++;
-                System.out.println("\nThe TV volume is at " + volume);
-            } else {
-                System.out.println("\nThe TV volume is at " + volume);
-                System.out.println("Maximum volume");
-            }            
-        } else {
-            System.out.println("\nTurn on the TV first");
+            }          
         }
     }
     
@@ -56,40 +41,20 @@ public class Tv {
         if(isOn == true){
             if(volume > 0){
                 volume--;
-                System.out.println("\n The TV volume is at " + volume);
-            } else {
-                System.out.println("\nThe TV volume is at " + volume);
-                System.out.println("Minumum volume");
             }
-        } else {
-            System.out.println("\nTurn on the TV first");
         }
     }
 
-    public String StatusTV(){
+    public Boolean ChangeChannel(int choseChannel){
         if(isOn == true){
-            return "On";
-        } else {
-            return "Off";
-        }
-    }
-
-    public Boolean CheckChannel(int selectedChannel){
-        return channels.contains(selectedChannel);
-    }
-    
-    public void ChangeChannel(){
-        if(isOn == true){
-            System.out.print("\nAvailable Channels " + channels.toString() + ": ");
-            int choseChannel = scan.nextInt();
-            if(CheckChannel(choseChannel)){
+            if(channels.contains(choseChannel)){
                 selectedChannel = choseChannel;
-                System.out.println("\nChanged to channel " + choseChannel);
+                return true;
             } else {
-                System.out.println("\nChannel not available");
-            }            
-        } else {
-            System.out.println("\nTurn on the TV first");
+                return false;
+            } 
         }
+        return false;
     }
 }
+
